@@ -15,7 +15,9 @@ public class TestService
         this.channelWriter = channelWriter;
     }
 
-    public async Task Handle()
+    public async Task Handle() => await HandleStatic(this.serviceScopeFactory, this.channelWriter);
+
+    public static async Task HandleStatic(IServiceScopeFactory serviceScopeFactory, ChannelWriter<WorkItem> channelWriter)
     {
         async Task DelayedExecute(CancellationToken ct)
         {
